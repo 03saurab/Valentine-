@@ -1,10 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Valentine Proposal</title>
+    <style>
+        body {
+            background-color: #FFB6C1;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            transform: rotate(45deg);
+            animation: float 5s infinite;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .heart:before {
+            top: -50px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 50px;
+            top: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+    
+        #celebration {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <h1>Will You Be My Valentine?</h1>
-    <p>This Valentine's Day, I'm asking you to be mine!</p>
+    <button id="proposeBtn">Propose</button>
+    <div id="celebration">🌹💖💍 The answer is YES! 💍💖🌹</div>
+
+    <script>
+        const proposeBtn = document.getElementById('proposeBtn');
+        const celebration = document.getElementById('celebration');
+
+        proposeBtn.onclick = function() {
+            celebration.style.display = 'block';
+            createHearts();
+        };
+
+        function createHearts() {
+            for (let i = 0; i < 10; i++) {
+                let heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }
+        }
+    </script>
 </body>
 </html>
